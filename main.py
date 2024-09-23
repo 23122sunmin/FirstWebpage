@@ -19,6 +19,6 @@ st.code(sample_code, language="python")
 
 st.text('아시죠?')
 
-st.markdown('미인정 결석일 뿐만 아니라 **:red[무려 담임쌤의 분노를 살수가 있다]**는 사실!')
+st.markdown('미인정 결석일 뿐만 아니라 :red[**무려 담임쌤의 분노를 살수가 있다**]는 사실!')
 
 st.markdown('기한은 내일까지니까 잘 숙지해두세요 ^^')
