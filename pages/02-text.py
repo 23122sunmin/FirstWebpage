@@ -12,8 +12,8 @@ st.caption('캡션은 짧은 설명을 추가하는 것!')
 
 sample_code = '''
 def function():
-  print('hello world')
+  print('겁내 쩔는 좌우명')
 '''
 st.code(sample_code, language="python")
 
-st.text('일반적인 텍스트를 입력해보았슴')
+st.text('내 좌우명을 입력해보았슴')
