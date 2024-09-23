@@ -11,7 +11,7 @@ st.subheader('체육한마당 신청서 제출하기!!')
 st.caption('부모님께 가정통신문 보여드리고 서명한 부분만 잘라서 내일까지 제출!')
 
 sample_code = '''
-def function():
+def announcement():
   print('안하면 미인정결석')
 '''
 
