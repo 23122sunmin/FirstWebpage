@@ -14,6 +14,15 @@ sample_code = '''
 def function():
   print('겁내 쩔는 좌우명')
 '''
+
 st.code(sample_code, language="python")
 
 st.text('내 좌우명을 입력해보았슴')
+
+st.markdown('streamlit은 **마크다운 문법을 지원**합니다.')
+
+st.markdown('텍스트의 색상을 :green[초록색]으로, **:blue[파란색 볼드체]**로 표현할 수도 있슴
+
+st.marksdown(':green[$\sqrt{x^2+y^2}=1')
+
+st.latex(r'\sqrt{x^2+y^2}=1')
