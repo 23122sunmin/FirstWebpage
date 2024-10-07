@@ -30,9 +30,8 @@ hidden_lotto = generate_hidden_lotto()
 button = st.button('로또 생성')
 
 if button:
-    st.subheader("정답 로또 번호 (숨김 처리)")
-    st.write(hidden_lotto)  # Debugging purposes, this line can be hidden if you don't want to reveal the numbers.
-
+    # 숨긴 로또 번호는 출력하지 않음
+    
     for i in range(1, 6):
         user_lotto = generate_lotto()
         highlighted_lotto = []
@@ -47,5 +46,5 @@ if button:
         # 로또 번호 출력 (HTML 스타일링 허용)
         st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)}', unsafe_allow_html=True)
     
-    # 여기 따옴표 문제 수정
+    # 생성된 시각 출력
     st.write(f"생성된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
