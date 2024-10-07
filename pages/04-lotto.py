@@ -12,9 +12,9 @@ def generate_lotto():
             number=random.randint(1,46)
             lotto.add(number)
 
-     lotto=list(lotto)
-     lotto.sort()
-     return lotto
+      lotto=list(lotto)
+      lotto.sort()
+      return lotto
 
 button=st.button('로또 생성')
 
