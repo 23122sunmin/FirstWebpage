@@ -35,16 +35,21 @@ if button:
     for i in range(1, 6):
         user_lotto = generate_lotto()
         highlighted_lotto = []
+        match_count = 0  # 당첨된 번호 개수
 
-        # 자리와 숫자가 모두 일치할 때 노란색으로 표시 (HTML을 사용)
+        # 자리와 숫자가 모두 일치할 때 노란색으로 표시하고 카운트 증가
         for j in range(6):
             if user_lotto[j] == hidden_lotto[j]:
                 highlighted_lotto.append(f'<span style="color:yellow">{user_lotto[j]}</span>')  # 노란색으로 표시
+                match_count += 1  # 일치하는 번호 개수 카운트
             else:
                 highlighted_lotto.append(str(user_lotto[j]))
 
+        # 일치한 번호에 따라 :sparkles: 추가
+        sparkles = ':sparkles:' * max(0, match_count - 1)  # 2개 이상 당첨되면 :sparkles: 추가
+
         # 로또 번호 출력 (HTML 스타일링 허용)
-        st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)}', unsafe_allow_html=True)
+        st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)} {sparkles}', unsafe_allow_html=True)
     
     # 생성된 시각 출력
-    st.write(f"생성된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
+    st.write(f"생성된 시각: {datetime.datetime.now().strftime("%y-%m-%d %H:%M")}")
