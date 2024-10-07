@@ -13,16 +13,15 @@ if st.button('자동 생성 후 추첨'):
     drawn_numbers = generate_lotto()  # 10개의 숫자를 자동으로 생성
     hidden_lotto = generate_lotto()  # 숨겨진 정답 번호도 10개 생성
 
-    st.write(f'숨겨진 정답 번호: {hidden_lotto}')  # 실제로는 사용자에게 숨겨야 하지만 여기서는 확인을 위해 출력
-    st.write(f'추첨된 번호: {drawn_numbers}')
+    # 추첨된 번호를 초록색으로 크게 표시
+    st.markdown(f"### 추첨된 번호: <span style='color: green; font-size: 36px;'>{drawn_numbers}</span>", unsafe_allow_html=True)
     
     # 맞춘 번호 계산
     matched_numbers = set(drawn_numbers).intersection(hidden_lotto)
     match_count = len(matched_numbers)
 
-    # 결과 표시
-    st.write(f'맞춘 번호: {list(matched_numbers)}')
+    # 결과 표시 (맞춘 숫자 삭제)
     st.write(f'총 맞춘 개수: {match_count}')
-    
+
     # 시각 표시
     st.write(f"추첨된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
