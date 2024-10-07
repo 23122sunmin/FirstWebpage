@@ -1,55 +1,64 @@
 import streamlit as st
 import random
 import datetime
+import math
 
-st.title(':sparkles:로또 생성기!!!!!!!!!!!!!!!!!!!!!:sparkles:')
+st.title(':sparkles:로또 번호 맞추기 게임:sparkles:')
 
-# 보이지 않는(정답) 로또 번호 생성
-def generate_hidden_lotto():
-    hidden_lotto = set()
-    while len(hidden_lotto) < 6:
-        number = random.randint(1, 45)  # 일반적으로 로또 번호는 1~45
-        hidden_lotto.add(number)
-    hidden_lotto = list(hidden_lotto)
-    hidden_lotto.sort()
-    return hidden_lotto
+# 로또 당첨 확률 계산 (1 ~ 9에서 6개를 선택하는 경우)
+def calculate_lotto_probability():
+    total_combinations = math.comb(9, 6)  # 9개 중 6개를 선택하는 조합
+    return 1 / total_combinations
 
-# 일반 로또 번호 생성
+# 로또 번호 추첨 함수 (1 ~ 9까지 번호 생성)
 def generate_lotto():
     lotto = set()
     while len(lotto) < 6:
-        number = random.randint(1, 45)
+        number = random.randint(1, 9)  # 1~9 사이의 숫자를 랜덤으로 선택
         lotto.add(number)
     lotto = list(lotto)
     lotto.sort()
     return lotto
 
-# 정답 로또 번호 생성 (보이지 않음)
-hidden_lotto = generate_hidden_lotto()
+# 당첨 확률 계산
+probability = calculate_lotto_probability()
 
-button = st.button('로또 생성')
+# 당첨 확률 표시
+st.write(f"당첨될 확률: {probability:.10f}")
 
-if button:
-    # 숨긴 로또 번호는 출력하지 않음
-    
-    for i in range(1, 6):
-        user_lotto = generate_lotto()
-        highlighted_lotto = []
-        match_count = 0  # 당첨된 번호 개수
+# 사용자 이름 입력
+user_name = st.text_input('당신의 이름을 입력하세요:')
 
-        # 자리와 숫자가 모두 일치할 때 노란색으로 표시하고 카운트 증가
-        for j in range(6):
-            if user_lotto[j] == hidden_lotto[j]:
-                highlighted_lotto.append(f'<span style="color:yellow">{user_lotto[j]}</span>')  # 노란색으로 표시
-                match_count += 1  # 일치하는 번호 개수 카운트
-            else:
-                highlighted_lotto.append(str(user_lotto[j]))
+# 사용자가 선택한 번호를 받는 부분 (1~9 선택)
+user_numbers = st.multiselect('번호를 선택하세요 (1~9)', list(range(1, 10)), default=[])
 
-        # 일치한 번호에 따라 :sparkles: 추가
-        sparkles = ':sparkles:' * max(0, match_count - 1)  # 2개 이상 당첨되면 :sparkles: 추가
+# 자동 생성 번호 저장 변수
+auto_generated = False
 
-        # 로또 번호 출력 (HTML 스타일링 허용)
-        st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)} {sparkles}', unsafe_allow_html=True)
-    
-    # 생성된 시각 출력
-    st.write(f"생성된 시각: {datetime.datetime.now().strftime("%y-%m-%d %H:%M")}")
+# "자동 생성" 버튼을 눌렀을 때
+if st.button('자동 생성'):
+    user_numbers = generate_lotto()
+    auto_generated = True
+    st.write(f'자동 생성된 번호: {user_numbers}')
+
+# 로또 번호 생성 및 결과 비교
+if st.button('로또 번호 추첨'):
+    if not user_name:
+        st.error('이름을 입력해주세요!')
+    elif not auto_generated and len(user_numbers) != 6:
+        st.error('6개의 번호를 선택하거나 자동 생성 버튼을 눌러주세요!')
+    else:
+        if not auto_generated:
+            user_numbers.sort()
+            st.write(f'{user_name}님이 선택한 번호: {user_numbers}')
+        
+        lotto_numbers = generate_lotto()
+        st.write(f'추첨된 로또 번호: {lotto_numbers}')
+        
+        # 맞춘 번호 계산
+        matched_numbers = set(user_numbers).intersection(lotto_numbers)
+        st.write(f'맞춘 번호: {list(matched_numbers)}')
+        st.write(f'총 맞춘 개수: {len(matched_numbers)}')
+
+        # 시각 표시
+        st.write(f"추첨된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
