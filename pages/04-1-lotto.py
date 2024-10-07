@@ -47,4 +47,4 @@ if button:
         # 로또 번호 출력 (HTML 스타일링 허용)
         st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)}', unsafe_allow_html=True)
     
-    st.write(j"생성된 시각: {datetime.datetime.now().strftime("%y-%m-%d %H:%M")}")
+    st.write(j'생성된 시각: {datetime.datetime.now().strftime("%y-%m-%d %H:%M")}')
