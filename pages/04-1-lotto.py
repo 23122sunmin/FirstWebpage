@@ -48,4 +48,4 @@ if button:
         st.markdown(f'{i}. 행운의 번호: {" ".join(highlighted_lotto)}', unsafe_allow_html=True)
     
     # 여기 따옴표 문제 수정
-    st.write(j"생성된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
+    st.write(f"생성된 시각: {datetime.datetime.now().strftime('%y-%m-%d %H:%M')}")
